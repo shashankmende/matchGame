@@ -1,0 +1,23 @@
+.nav-container {
+  background-color: #2c0e3a;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.website-logo {
+  height: 100px;
+  width: 250px;
+}
+.right-side-container {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+}
+.timer {
+  width: 40px;
+  height: 40px;
+  margin: 20px;
+}

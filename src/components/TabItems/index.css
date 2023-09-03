@@ -1,0 +1,13 @@
+.list-item {
+  list-style-type: none;
+  color: white;
+}
+.tabBtn {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
