@@ -251,7 +251,6 @@ const imagesList = [
   },
 ]
 
-let answer
 const shuffledEmojisList = list => {
   console.log('list=', list)
   return list.sort(() => Math.random() - 0.5)
@@ -266,6 +265,16 @@ class App extends Component {
     tabId: tabsList[0].tabId,
   }
 
+  onClickPlayAgain = () => {
+    this.setState({
+      time: 60,
+      score: 0,
+      tabId: tabsList[0].tabId,
+      isTimeRunning: true,
+      imagesList,
+    })
+  }
+
   onClickTab = id => {
     console.log('Tab item is clicked and the id is', id)
     this.setState({
@@ -276,54 +285,80 @@ class App extends Component {
   onClickThumb = clickedId => {
     const {id} = imagesList[0]
     const {isTimeRunning, score} = this.state
-    console.log('clicked id=', clickedId)
-    console.log('id=', id)
-    if (isTimeRunning && id === clickedId) {
+
+    if (id === clickedId) {
       console.log('matched')
       this.setState({
         imagesList: shuffledEmojisList(imagesList),
         score: score + 1,
       })
     } else {
-      answer = <WinOrLoss />
+      this.setState({
+        isTimeRunning: !isTimeRunning,
+      })
     }
   }
 
   render() {
-    const {tabId, score} = this.state
+    const {tabId, score, isTimeRunning} = this.state
     const matchedImageUrl = imagesList[0].imageUrl
-
     const filteredList = imagesList.filter(each => each.category === tabId)
-    console.log(filteredList)
+    let answer = ''
+    if (isTimeRunning) {
+      console.log('display this block')
+      answer = (
+        <div className="middle-container">
+          <img src={matchedImageUrl} alt="match" className="matched-image" />
+          <ul className="unordeded-container">
+            {tabsList.map(each => (
+              <TabItems
+                key={each.tabId}
+                tab={each}
+                onClickTab={this.onClickTab}
+              />
+            ))}
+          </ul>
+
+          <ul className="thumbnail-container">
+            {filteredList.map(each => (
+              <Thumbnails
+                key={each.id}
+                thumb={each}
+                onClickThumb={this.onClickThumb}
+              />
+            ))}
+          </ul>
+        </div>
+      )
+    } else {
+      answer = (
+        <div className="result-container">
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/match-game-trophy.png"
+            alt="trophy"
+          />
+          <p>YOUR SCORE</p>
+          <p>{score}</p>
+          <button
+            type="button"
+            className="play-again-button"
+            onClick={this.onClickPlayAgain}
+          >
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/match-game-play-again-img.png"
+              alt="reset"
+            />
+
+            <p>PLAY AGAIN</p>
+          </button>
+        </div>
+      )
+    }
 
     return (
       <div className="bg-container">
         <NavBar score={score} />
-        <div className="bottom-container">
-          <div className="middle-container">
-            <img src={matchedImageUrl} alt="match" className="matched-image" />
-            <ul className="unordeded-container">
-              {tabsList.map(each => (
-                <TabItems
-                  key={each.tabId}
-                  tab={each}
-                  onClickTab={this.onClickTab}
-                />
-              ))}
-            </ul>
-
-            <ul className="thumbnail-container">
-              {filteredList.map(each => (
-                <Thumbnails
-                  key={each.id}
-                  thumb={each}
-                  onClickThumb={this.onClickThumb}
-                />
-              ))}
-            </ul>
-            {answer}
-          </div>
-        </div>
+        <div className="bottom-container">{answer}</div>
       </div>
     )
   }

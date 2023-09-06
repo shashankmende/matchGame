@@ -18,7 +18,7 @@ class NavBar extends Component {
             alt="timer"
             className="timer"
           />
-          <p>60</p>
+          <p>60 sec</p>
         </div>
       </nav>
     )

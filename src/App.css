@@ -44,3 +44,30 @@ body {
   justify-content: center;
   align-items: center;
 }
+.result-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/match-game-score-card-lg-bg.png');
+  background-size: cover;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+}
+.trophy {
+  height: 40x;
+  width: 80px;
+}
+.play-again-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #cf60c8;
+  color: white;
+  border-radius: 10px;
+  padding: 6px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}

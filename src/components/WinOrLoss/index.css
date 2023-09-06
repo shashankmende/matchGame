@@ -1,3 +1,17 @@
 .bg-container {
+  background-color: #2c0e3a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+.middle-container {
   background-image: url('https://assets.ccbp.in/frontend/react-js/match-game-score-card-lg-bg.png');
+  background-size: cover;
+}
+.tropy {
+  width: 60px;
+  height: 150px;
 }
